@@ -109,6 +109,15 @@ async def create_army(ctx):
     await ctx.send(link)
 
 @bot.command()
+async def troop_stats(ctx,troop_name:str,th:int):
+    try:
+        troop = coc_client.get_troop(troop_name)
+        th_level = troop.get_max_level_for_townhall(th)
+        await ctx.send(f'Name: {troop.name}\nTownhall: {th}\nAll levels: {troop.level}\nMax level according to Townhall {th}: {th_level}')
+    except ValueError as e:
+        await ctx.send(e)
+
+@bot.command()
 async def clan_info(ctx, clan_tag):
     if not utils.is_valid_tag(clan_tag):
         await ctx.send("You didn't give me a proper tag!")
