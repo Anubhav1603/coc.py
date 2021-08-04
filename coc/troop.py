@@ -201,6 +201,11 @@ class Troop(DataContainer):
             if th_level != townhall:
                 continue
 
+            lab = max(cls.lab_level)
+
+            if lab_level> lab:
+                lab_level = max(cls.lab_level)
+
             return max(troop_level for troop_level, lab in enumerate(cls.lab_level, start=1) if lab == lab_level)
 
         raise ValueError("The townhall level was not valid.")
@@ -231,11 +236,11 @@ class TroopHolder(DataContainerHolder):
                 troop_meta,
                 id=object_ids[supercell_name],
                 name=english_aliases[troop_meta["TID"][0]][0],
+                # level=troop_meta[]["TroopLevel"],
                 lab_to_townhall=lab_to_townhall,
             )
             self.items.append(new_troop)
             self.item_lookup[(new_troop.name, new_troop._is_home_village)] = new_troop
-
             try:
                 super_meta = super_data[supercell_name]
             except KeyError:
@@ -257,7 +262,6 @@ class TroopHolder(DataContainerHolder):
                 troop = default
         else:
             troop = default
-
         return troop(data=data, townhall=townhall)
 
     def get(self, name, home_village=True) -> Optional[Type[Troop]]:
