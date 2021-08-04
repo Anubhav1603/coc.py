@@ -236,7 +236,6 @@ class TroopHolder(DataContainerHolder):
                 troop_meta,
                 id=object_ids[supercell_name],
                 name=english_aliases[troop_meta["TID"][0]][0],
-                # level=troop_meta[]["TroopLevel"],
                 lab_to_townhall=lab_to_townhall,
             )
             self.items.append(new_troop)
