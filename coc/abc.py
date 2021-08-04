@@ -180,6 +180,7 @@ class DataContainer(metaclass=DataContainerMetaClass):
 
         cls.range = try_enum(UnitStat, troop_meta.get("AttackRange"))
         cls.dps = try_enum(UnitStat, troop_meta.get("DPS"))
+        cls.level = try_enum(UnitStat, troop_meta.get("TroopLevel"))
         cls.ground_target = _get_maybe_first(troop_meta, "GroundTargets", default=True)
         cls.hitpoints = try_enum(UnitStat, troop_meta.get("Hitpoints"))
 
